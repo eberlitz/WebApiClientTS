@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>WebApiClientTS</id>
+    <version>0.0.1</version>
+    <authors>eberlitz,JulioGold</authors>
+    <owners>eberlitz,JulioGold</owners>
+    <licenseUrl>https://raw.githubusercontent.com/eberlitz/WebApiClientTS/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/eberlitz/WebApiClientTS</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Asp.NET Web API client generator for TypeScript files</description>
+    <releaseNotes>First release.</releaseNotes>
+    <copyright>Copyright 2016</copyright>
+    <tags>WebAPI ASP.NET Generator TypeScript TS Client</tags>
+    <dependencies>
+      <dependency id="Microsoft.AspNet.WebApi.Core" version="5.2.3"  />
+      <dependency id="RazorEngine" version="3.8.1"  />
+    </dependencies>
+  </metadata>
+</package>
