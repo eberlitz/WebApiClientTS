@@ -6,7 +6,6 @@
     @Raw(string.Join(", ", parameters.Select(p => p.Name + ": " + p.Type)));
 }
 import 'angular';
-import * as helper from './helper.api';
 @Raw(Model.CompileModels())
 export interface I@(Model.Name)ApiService {
 @foreach (MethodMetadata method in Model.Methods)
@@ -39,7 +38,7 @@ export class @(Model.Name)ApiService implements I@(Model.Name)ApiService {
             cache: @method.Cache</text>}
 
         }, config || {});
-        return this.$http<@(method.ReturnType)>(config).then(helper.getResponseData);
+        return this.$http<@(method.ReturnType)>(config);
     }</text>
 }
 }

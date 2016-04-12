@@ -158,7 +158,11 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\Api\AdressesController.cs" />
     <Compile Include="Controllers\Api\CodeGeneratorController.cs" />
+    <Compile Include="Controllers\Api\ContactsController.cs" />
+    <Compile Include="Controllers\Api\DocumentsController.cs" />
+    <Compile Include="Controllers\Api\ProductsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
