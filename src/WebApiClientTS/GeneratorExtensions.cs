@@ -22,13 +22,17 @@ namespace WebApiClientTS
         {
             var builder = new TsModelBuilder();
             types.ForEach(a => builder.Add(a));
+
             var model = builder.Build();
+
             var generator = new TsGenerator();
             generator.IndentationString = "    ";
             generator.SetTypeVisibilityFormatter((tsClass, typeName) => true);
             generator.SetModuleNameFormatter((module) => "");
             generator.SetIdentifierFormatter((identifier) => Char.ToLower(identifier.Name[0]) + identifier.Name.Substring(1));
-            var typeScript = generator.Generate(model);
+
+            string typeScript = generator.Generate(model);
+
             return typeScript;
         }
 
