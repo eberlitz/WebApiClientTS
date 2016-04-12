@@ -22,7 +22,7 @@ namespace WebApiSample.Controllers.Api
                 OutputFolderPath = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath("~"), "App_Data", "clientApi"),
                 IgnoreThoseControllers = new string[]
                 {
-                    "Documents"
+                    "Values"
                 }
             };
 
