@@ -1,3 +1,5 @@
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RW6F5XUSMW5NJ)
+
 # WebApiClientTS
 Asp.NET Web API client generator for TypeScript files  
   
