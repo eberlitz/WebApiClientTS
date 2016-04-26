@@ -2,14 +2,15 @@
 <package >
   <metadata>
     <id>WebApiClientTS</id>
-    <version>0.0.1</version>
+    <title>WebApiClientTS</title>
+    <description>Asp.NET Web API client generator for TypeScript files</description>
+    <version>0.0.2</version>
     <authors>eberlitz,JulioGold</authors>
     <owners>eberlitz,JulioGold</owners>
     <licenseUrl>https://raw.githubusercontent.com/eberlitz/WebApiClientTS/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/eberlitz/WebApiClientTS</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Asp.NET Web API client generator for TypeScript files</description>
-    <releaseNotes>First release.</releaseNotes>
+    <releaseNotes>Fix decimal bug.</releaseNotes>
     <copyright>Copyright 2016</copyright>
     <tags>WebAPI ASP.NET Generator TypeScript TS Client</tags>
     <dependencies>
