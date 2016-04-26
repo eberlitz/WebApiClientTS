@@ -110,9 +110,14 @@ namespace WebApiClientTS
             return type == typeof(DateTime);
         }
 
+        public static bool IsDecimal(Type type)
+        {
+            return type == typeof(Decimal);
+        }
+
         public static bool IsSimpleType(Type type)
         {
-            return type.IsPrimitive || type == typeof(string) || IsDateTimeType(type);
+            return type.IsPrimitive || type == typeof(string) || IsDateTimeType(type) || IsDecimal(type);
         }
 
         private static IList<Type> GetNestedUsedModels(Type type, ISet<Type> processedTypes)
