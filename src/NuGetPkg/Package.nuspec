@@ -4,7 +4,7 @@
     <id>WebApiClientTS</id>
     <title>WebApiClientTS</title>
     <description>Asp.NET Web API client generator for TypeScript files</description>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
     <authors>eberlitz,JulioGold</authors>
     <owners>eberlitz,JulioGold</owners>
     <licenseUrl>https://raw.githubusercontent.com/eberlitz/WebApiClientTS/master/LICENSE</licenseUrl>
