@@ -25,6 +25,14 @@ Now you can run the web API and then access the controller to generate the types
 It's done, the typescript client api was generated  
 ![](./assets/TSClientApi.png)  
 
+## How to create a package  
+  
+You will need the *NuGet command line tool* then visit this [NuGet](https://docs.nuget.org/consume/command-line-reference) link to obtain and install this tool.  
+  
+Do not forget to build the project `Release mode` before generate the package ;D  
+  
+With NuGet installed, on `\src\NuGetPkg` folder of this repository, execute the following command to generate the package: `nuget.exe pack Package.nuspec`, it's done, the `.nupkg` was created at the same folder.  
+
 Danke  
 
 [WebApiClientTS on nuget.org](https://www.nuget.org/packages/WebApiClientTS/)
