@@ -4,13 +4,13 @@
     <id>WebApiClientTS</id>
     <title>WebApiClientTS</title>
     <description>Asp.NET Web API client generator for TypeScript files</description>
-    <version>0.0.3</version>
+    <version>0.0.4</version>
     <authors>eberlitz,JulioGold</authors>
     <owners>eberlitz,JulioGold</owners>
     <licenseUrl>https://raw.githubusercontent.com/eberlitz/WebApiClientTS/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/eberlitz/WebApiClientTS</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <releaseNotes>Fix decimal bug.</releaseNotes>
+    <releaseNotes>Fix DateTimeOffset bug.</releaseNotes>
     <copyright>Copyright 2016</copyright>
     <tags>WebAPI ASP.NET Generator TypeScript TS Client</tags>
     <dependencies>
