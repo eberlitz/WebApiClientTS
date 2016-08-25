@@ -21,6 +21,13 @@ namespace WebApiSample.Controllers.Api
             return new Document();
         }
 
+        [HttpGet]
+        [Route("Document")]
+        public Document DocumentCreationDate(DateTimeOffset creationDateStart, DateTimeOffset creationDateEnd)
+        {
+            return new Document();
+        }
+
         [HttpPost]
         [Route("Document")]
         public void CreateDocument([FromBody]Document model)

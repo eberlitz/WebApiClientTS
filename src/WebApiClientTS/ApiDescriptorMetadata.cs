@@ -30,16 +30,16 @@ namespace WebApiClientTS
                             {
                                 Name = GetMethodName(api, controllerApis.ToList()),
                                 Parameters = api.ParameterDescriptions
-                                .Select(p =>
-                                {
-                                    return new ParameterMetadata()
+                                    .Select(p =>
                                     {
-                                        Name = p.ParameterDescriptor.ParameterName,
-                                        Type = ConvertTypeToTs(p.ParameterDescriptor.ParameterType),
-                                        IsQueryParam = GetQueryParam(p.ParameterDescriptor),
-                                        IsNullable = IsNullableType(p.ParameterDescriptor.ParameterType)
-                                    };
-                                }).ToList(),
+                                        return new ParameterMetadata()
+                                        {
+                                            Name = p.ParameterDescriptor.ParameterName,
+                                            Type = ConvertTypeToTs(p.ParameterDescriptor.ParameterType),
+                                            IsQueryParam = GetQueryParam(p.ParameterDescriptor),
+                                            IsNullable = IsNullableType(p.ParameterDescriptor.ParameterType)
+                                        };
+                                    }).ToList(),
                                 ReturnType = GenerateInlineClassResult(api),
                                 Url = api.RelativePath.Replace("{", "${"),
                                 RelativePath = GetRelativePath(api),
@@ -282,7 +282,7 @@ namespace WebApiClientTS
                 return "string[]";
             }
 
-            if (type == typeof(DateTime))
+            if (type == typeof(DateTime) || type == typeof(DateTimeOffset))
             {
                 return "Date";
             }
@@ -291,8 +291,7 @@ namespace WebApiClientTS
             {
                 return type.Name;
             }
-
-
+            
             if (IsList(type))
             {
                 if (type.IsArray)
