@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Http;
 
 namespace WebApiSample.Controllers.Api
@@ -42,5 +43,9 @@ namespace WebApiSample.Controllers.Api
     public class Document
     {
         public int Id { get; set; }
+
+        public DateTime EmissionDate { get; set; }
+
+        public DateTimeOffset CreationDate { get; set; }
     }
 }
