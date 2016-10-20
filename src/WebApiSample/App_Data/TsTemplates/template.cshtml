@@ -11,7 +11,7 @@ export interface I@(Model.Name)ApiService {
 @foreach (MethodMetadata method in Model.Methods)
 {
 <text>
-    @(method.Name)(@ParameterListing(method.Parameters)): ng.IPromise@(Raw("<"))@(method.ReturnType)@(Raw(">"));</text>
+    @(method.Name)(@ParameterListing(method.Parameters)): ng.IPromise@(Raw("<"))@(Raw(method.ReturnType))@(Raw(">"));</text>
 }
 }
 
@@ -25,7 +25,7 @@ export class @(Model.Name)ApiService implements I@(Model.Name)ApiService {
 @foreach (MethodMetadata method in Model.Methods)
 {
 <text>
-    @(method.Name)(@ParameterListing(method.Parameters)): ng.IPromise@(Raw("<"))@(method.ReturnType)@(Raw(">")) {
+    @(method.Name)(@ParameterListing(method.Parameters)): ng.IPromise@(Raw("<"))@(Raw(method.ReturnType))@(Raw(">")) {
         config = angular.extend({
             url: '~/@method.RelativePath',
             method: '@method.HttpMethod',
@@ -38,7 +38,7 @@ export class @(Model.Name)ApiService implements I@(Model.Name)ApiService {
             cache: @method.Cache</text>}
 
         }, config || {});
-        return this.$http<@(method.ReturnType)>(config);
+        return this.$http<@(Raw(method.ReturnType))>(config);
     }</text>
 }
 }

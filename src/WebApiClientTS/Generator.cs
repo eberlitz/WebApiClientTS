@@ -43,7 +43,12 @@ namespace WebApiClientTS
 
             string outputFilePath = Path.Combine(_configuration.OutputFolderPath, string.Format("{0}{1}", name.ToLowerCaseFirstLetter(), _configuration.FileNameSuffix));
 
-            File.WriteAllText(outputFilePath, content);
+            using (StreamWriter streamWriter = new StreamWriter(outputFilePath))
+            {
+                streamWriter.Write(content);
+                streamWriter.Flush();
+                streamWriter.Close();
+            }
         }
     }
 }

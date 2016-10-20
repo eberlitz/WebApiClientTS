@@ -28,7 +28,9 @@ namespace WebApiSample.Controllers.Api
 
             Generator generator = new Generator(config);
 
-            List<ApiDescription> apis = Configuration.Services.GetApiExplorer().ApiDescriptions.OrderBy(o => o.RelativePath).ToList();
+            List<ApiDescription> apis = Configuration.Services.GetApiExplorer().ApiDescriptions.OrderBy(o => o.RelativePath)
+                .Where(w => !config.IgnoreThoseControllers.Contains(w.ActionDescriptor.ControllerDescriptor.ControllerName))
+                .ToList();
 
             var metadata = ApiDescriptorMetadata.From(apis).Where(ctrl => !config.IgnoreThoseControllers.Contains(ctrl.Name));
 

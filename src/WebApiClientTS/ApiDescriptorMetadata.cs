@@ -217,13 +217,16 @@ namespace WebApiClientTS
                 returnType = ConvertTypeToTs(apiDescription.ResponseDescription.ResponseType);
             }
             // Se tem algum tipo definido na action mesmo e este for generico. TODO: Refatorar para melhorar esta verificação de genérico, aqui queremos saber se é uma lista, não um genérico, um tipo Nullable também é um genérico mas não é uma lista.
-            else if (apiDescription.ResponseDescription.DeclaredType.IsGenericType)
+            else if (IsIEnumerableType(apiDescription.ResponseDescription.DeclaredType))
             {
                 returnType = ConvertTypeToTs(apiDescription.ResponseDescription.DeclaredType.GetGenericArguments()[0]) + "[]";
             }
 
+            // Se não caiu em qualquer teste, provavelmente o tipo é genérico porém não é um tipo que implementa IEnumerable, entao retorna ele mesmo (PagedResult<Product>)
             return returnType;
         }
+
+        private static bool IsIEnumerableType(Type type) => type.GetInterfaces().Any((item) => item.IsGenericType && item.GetGenericTypeDefinition() == typeof(IEnumerable<>));
 
         private static string ConvertTypeToTs(Type type)
         {
