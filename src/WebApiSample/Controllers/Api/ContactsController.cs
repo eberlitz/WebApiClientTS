@@ -37,11 +37,19 @@ namespace WebApiSample.Controllers.Api
         public void DeleteContact(int id)
         {
         }
+
+        [HttpPost]
+        [Route("ContactDescription")]
+        public void ContactDescription(int id, [FromBody]string description)
+        {
+        }
     }
     
     public class Contact
     {
         public int Id { get; set; }
+
+        public string Description { get; set; }
 
         public ContactType Type { get; set; }
     }
