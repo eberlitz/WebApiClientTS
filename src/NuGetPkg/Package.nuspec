@@ -4,15 +4,15 @@
     <id>WebApiClientTS</id>
     <title>WebApiClientTS</title>
     <description>Asp.NET Web API client generator for TypeScript files</description>
-    <version>0.0.5</version>
+    <version>0.0.6</version>
     <authors>eberlitz,JulioGold</authors>
     <owners>eberlitz,JulioGold</owners>
     <licenseUrl>https://raw.githubusercontent.com/eberlitz/WebApiClientTS/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/eberlitz/WebApiClientTS</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <releaseNotes>Fix generic type creation.</releaseNotes>
+    <releaseNotes>Fix the issue #6 Payload with just string parameter.</releaseNotes>
     <copyright>Copyright 2016</copyright>
-    <tags>WebAPI ASP.NET Generator TypeScript TS Client</tags>
+    <tags>WebAPI ASP.NET Generator TypeScript TS Client gen documentation discovery help AspNetWebApi aspnet aspnetcore  API REST Docs webclient clientapi consume use</tags>
     <dependencies>
       <dependency id="Microsoft.AspNet.WebApi.Core" version="5.2.3"  />
       <dependency id="RazorEngine" version="3.8.1"  />

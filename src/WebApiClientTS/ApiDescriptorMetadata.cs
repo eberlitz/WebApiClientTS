@@ -8,7 +8,7 @@ namespace WebApiClientTS
 {
     public class ApiDescriptorMetadata
     {
-        public static IEnumerable<ApiControllerMetadata> From(IList<ApiDescription> apiDescriptions)
+        public static IEnumerable<ApiControllerMetadata> From(IList<ApiDescription> apiDescriptions, Func<string,string> stringifyFunction = null)
         {
             return apiDescriptions
                 .GroupBy(g => g.ActionDescriptor.ControllerDescriptor)
@@ -44,7 +44,7 @@ namespace WebApiClientTS
                                 Url = api.RelativePath.Replace("{", "${"),
                                 RelativePath = GetRelativePath(api),
                                 HttpMethod = api.HttpMethod.ToString(),
-                                RequestData = GetRequestData(api),
+                                RequestData = GetRequestData(api, stringifyFunction),
                                 UsedModels = apiUsedModels,
                                 Cache = GetCacheValue(api)
                             };
@@ -182,18 +182,31 @@ namespace WebApiClientTS
             return new HashSet<Type>(parameters.SelectMany(a => GetNestedUsedModels(a, new HashSet<Type>())));
         }
 
-        private static string GetRequestData(ApiDescription apiDescription)
+        private static string GetRequestData(ApiDescription apiDescription, Func<string, string> stringifyFunction)
         {
             string body = "null";
+
             foreach (var paramItem in apiDescription.ParameterDescriptions)
             {
                 // Somente para aqueles parâmetros que são HttpBody
                 if (IsFromBody(paramItem.ParameterDescriptor))
                 {
-                    // Como é o body não deve ser formatada como objeto
-                    body = paramItem.ParameterDescriptor.ParameterName;
+                    // Como o é from body, então tem apenas um tipo, aqui eu vou testar se o tipo for string, então eu devo 
+                    // colocar o JSON.stringify() para que o parâmetro seja corretamente
+                    // enviado, senão o parâmetro não é enviado e nunca vai chegar na controller.
+                    if (stringifyFunction != null && paramItem.ParameterDescriptor.ParameterType.IsAssignableFrom(typeof(System.String)))
+                    {
+                        // Como é o from body e é do tipo string, devo executar a função de stringfy
+                        body = stringifyFunction(paramItem.ParameterDescriptor.ParameterName);
+                    }
+                    else
+                    {
+                        // Como é o from body não deve ser formatada como objeto
+                        body = paramItem.ParameterDescriptor.ParameterName;
+                    }
                 }
             }
+
             return body;
         }
 

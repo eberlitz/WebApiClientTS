@@ -29,7 +29,7 @@ export class @(Model.Name)ApiService implements I@(Model.Name)ApiService {
         config = angular.extend({
             url: '~/@method.RelativePath',
             method: '@method.HttpMethod',
-            data: @method.RequestData,
+            data: @(Raw(method.RequestData)),
             params: {@Raw(string.Join(",", method.Parameters.Where(a => a.IsQueryParam)
                .Select(p => "\r\n                " + p.Name + (p.IsNullable ? (": " + p.Name + " == null ? '' : " + p.Name) : ""))))
             }@if (!string.IsNullOrEmpty(method.Cache))

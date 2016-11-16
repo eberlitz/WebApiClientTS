@@ -1,6 +1,7 @@
 ﻿#if DEBUG // Use it just on development
 namespace WebApiSample.Controllers.Api
 {
+    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
@@ -32,7 +33,11 @@ namespace WebApiSample.Controllers.Api
                 .Where(w => !config.IgnoreThoseControllers.Contains(w.ActionDescriptor.ControllerDescriptor.ControllerName))
                 .ToList();
 
-            var metadata = ApiDescriptorMetadata.From(apis).Where(ctrl => !config.IgnoreThoseControllers.Contains(ctrl.Name));
+            // Sample of an stringify function
+            Func<string, string> stringifyFunction = (parameterName) => $"JSON.stringify({parameterName})";
+            //Func<string, string> stringifyFunction = (parameterName) => $"\"'\"+{parameterName}+\"'\"";
+
+            var metadata = ApiDescriptorMetadata.From(apis, stringifyFunction).Where(ctrl => !config.IgnoreThoseControllers.Contains(ctrl.Name));
 
             // Add settings to the template of AngularJS request
             metadata.SelectMany(a => a.Methods).ToList().ForEach(m =>

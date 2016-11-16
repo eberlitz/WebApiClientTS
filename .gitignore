@@ -253,3 +253,9 @@ paket-files/
 
 # Directory to generated client api files
 clientApi/
+
+# Directory where the dll of package has generated
+src/NuGetPkg/lib/
+
+# File to generate package
+nuget.exe
