@@ -8,7 +8,7 @@ namespace WebApiClientTS
 {
     public class ApiDescriptorMetadata
     {
-        public static IEnumerable<ApiControllerMetadata> From(IList<ApiDescription> apiDescriptions, Func<string,string> stringifyFunction = null)
+        public static IEnumerable<ApiControllerMetadata> From(IList<ApiDescription> apiDescriptions, Func<string, string> stringifyFunction = null)
         {
             return apiDescriptions
                 .GroupBy(g => g.ActionDescriptor.ControllerDescriptor)
@@ -148,15 +148,7 @@ namespace WebApiClientTS
             //Se Lista, pega os NestedUsedModels do tipo dele
             if (IsList(type))
             {
-                Type listOfType;
-                if (type.IsArray)
-                {
-                    listOfType = type.GetElementType();
-                }
-                else
-                {
-                    listOfType = type.GetGenericArguments()[0];
-                }
+                Type listOfType = GetTypeOfEnumerable(type);
                 return GetNestedUsedModels(listOfType, processedTypes);
             }
 
@@ -165,6 +157,21 @@ namespace WebApiClientTS
             types.Add(type);
             types.AddRange(type.GetProperties().SelectMany(a => GetNestedUsedModels(a.PropertyType, processedTypes)));
             return types;
+        }
+
+        private static Type GetTypeOfEnumerable(Type type)
+        {
+            Type listOfType;
+            if (type.IsArray)
+            {
+                listOfType = type.GetElementType();
+            }
+            else
+            {
+                listOfType = type.GetGenericArguments()[0];
+            }
+
+            return listOfType;
         }
 
         private static ISet<Type> GetUsedModelsFrom(ApiDescription api)
@@ -212,30 +219,30 @@ namespace WebApiClientTS
 
         private static string GenerateInlineClassResult(ApiDescription apiDescription)
         {
-            string returnType = ConvertTypeToTs(apiDescription.ResponseDescription.DeclaredType);
+            var type = apiDescription.ResponseDescription.DeclaredType;
+            var responseType = apiDescription.ResponseDescription.ResponseType;
+            string returnType = ConvertTypeToTs(type);
 
             // Para os controllers sem retorno (void)
-            if (apiDescription.ResponseDescription.DeclaredType == null)
+            if (type == null)
             {
                 returnType = "void";
             }
             // Se o tipo for este, então significa que não foi definido nenhum tipo especifico
-            else if (apiDescription.ResponseDescription.DeclaredType.Name == "IHttpActionResult")
+            else if (type.Name == "IHttpActionResult")
             {
                 returnType = "any";
             }
             // Se pegar aqui significa que foi especificado um tipo de retorno através do atributo ResponseType
-            else if (apiDescription.ResponseDescription.ResponseType != null)
+            else if (responseType != null)
             {
-                returnType = ConvertTypeToTs(apiDescription.ResponseDescription.ResponseType);
+                returnType = ConvertTypeToTs(responseType);
             }
-            // Se tem algum tipo definido na action mesmo e este for generico. TODO: Refatorar para melhorar esta verificação de genérico, aqui queremos saber se é uma lista, não um genérico, um tipo Nullable também é um genérico mas não é uma lista.
-            else if (IsIEnumerableType(apiDescription.ResponseDescription.DeclaredType))
+            else
             {
-                returnType = ConvertTypeToTs(apiDescription.ResponseDescription.DeclaredType.GetGenericArguments()[0]) + "[]";
+                returnType = ConvertTypeToTs(type);
             }
 
-            // Se não caiu em qualquer teste, provavelmente o tipo é genérico porém não é um tipo que implementa IEnumerable, entao retorna ele mesmo (PagedResult<Product>)
             return returnType;
         }
 
@@ -307,7 +314,7 @@ namespace WebApiClientTS
             {
                 return type.Name;
             }
-            
+
             if (IsList(type))
             {
                 if (type.IsArray)
