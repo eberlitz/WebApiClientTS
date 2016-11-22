@@ -14,6 +14,13 @@ namespace WebApiSample.Controllers.Api
         }
 
         [HttpGet]
+        [Route("ContactDescription")]
+        public string ContactDescription(int id)
+        {
+            return "Some contact description";
+        }
+
+        [HttpGet]
         [Route("Contact")]
         public Contact Contact(int id)
         {
