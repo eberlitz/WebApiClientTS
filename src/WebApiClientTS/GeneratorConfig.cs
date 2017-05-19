@@ -1,4 +1,7 @@
-﻿namespace WebApiClientTS
+﻿using System;
+using System.IO;
+
+namespace WebApiClientTS
 {
     /// <summary>
     /// Represents the configuration that you can pass to generator.
@@ -28,5 +31,29 @@
         /// The folder where you want to generate the files.
         /// </summary>
         public string OutputFolderPath { get; set; }
+
+        /// <summary>
+        /// Check if configuration is valid.
+        /// </summary>
+        /// <param name="configuration">Configuration parameters to check.</param>
+        public static void CheckGeneratorConfig(GeneratorConfig configuration)
+        {
+            if (configuration == null)
+            {
+                throw new Exception("You need to pass a configuration.");
+            }
+            else if (String.IsNullOrEmpty(configuration.ControllerTemplate))
+            {
+                throw new Exception("You need to pass a correct ControllerTemplate.");
+            }
+            else if (!new FileInfo(configuration.ControllerTemplate).Exists)
+            {
+                throw new Exception("You need to pass a exist ControllerTemplate.");
+            }
+            else if (String.IsNullOrEmpty(configuration.OutputFolderPath))
+            {
+                throw new Exception("You need to pass a OutputFolderPath.");
+            }
+        }
     }
 }
