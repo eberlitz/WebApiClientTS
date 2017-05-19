@@ -14,6 +14,11 @@ First, you need to install the NuGet package, you can do it with that command:
 Install-Package WebApiClientTS
 ```
   
+### There is two way to use it  
+
+### First way
+
+This is the old way, at this mode you need to explicit create a controller in your application.
 Them you need to implement a specific controller in your API to explore your API and generate the client API when you call that.  
 ```csharp
 #if DEBUG // Use it just on development
@@ -83,6 +88,33 @@ Now you can run the web API and then access the controller to generate the types
   
 It's done, the typescript client api was generated  
 ![](./assets/TSClientApi.png)  
+
+### Second way  
+At this way you don't need to create a new controller in you application, you just need to configure the generator (at `Global.asax`) and call the implicit contoller.  
+
+```csharp
+#if DEBUG // Use it just on development
+
+            // The endpoint will be http://localhost:16120/c/g/api/run
+
+            WebApiClientTS.GeneratorConfig config = new GeneratorConfig()
+            {
+                ControllerTemplate = System.Web.Hosting.HostingEnvironment.MapPath("~/App_Data/TsTemplates/template.cshtml"),
+                OutputFolderPath = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath("~"), "App_Data", "clientApi"),
+                IgnoreThoseControllers = new string[]
+                {
+                    "Values"
+                }
+            };
+            
+            WebApiClientTS.Generator.ConfigureApiGenerator(GlobalConfiguration.Configuration.Routes, config);
+#endif
+```
+To call the controller  
+![](./assets/ImplicitController.png)  
+
+It's done, at the same way the typescript client api was generated  
+![](./assets/TSClientApiNewWay.png)  
 
 ## How to create a package  
 
