@@ -1,16 +1,16 @@
-<?xml version="1.0"?>
-<package >
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>WebApiClientTS</id>
     <title>WebApiClientTS</title>
     <description>Asp.NET Web API client generator for TypeScript files</description>
-    <version>0.0.6</version>
+    <version>0.0.8</version>
     <authors>eberlitz,JulioGold</authors>
     <owners>eberlitz,JulioGold</owners>
     <licenseUrl>https://raw.githubusercontent.com/eberlitz/WebApiClientTS/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/eberlitz/WebApiClientTS</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <releaseNotes>Fix the issue #6 Payload with just string parameter.</releaseNotes>
+    <releaseNotes>Fix the issue #8 now you don't need to create a controller in your application, just configure the generator at Global.asax.</releaseNotes>
     <copyright>Copyright 2016</copyright>
     <tags>WebAPI ASP.NET Generator TypeScript TS Client gen documentation discovery help AspNetWebApi aspnet aspnetcore  API REST Docs webclient clientapi consume use</tags>
     <dependencies>
