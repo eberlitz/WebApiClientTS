@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -21,6 +22,10 @@ namespace WebApiSample
 
             // The endpoint will be http://localhost:16120/c/g/api/run
 
+            // Sample of an stringify function
+            Func<string, string> stringifyFunction = (parameterName) => $"JSON.stringify({parameterName})";
+            //Func<string, string> stringifyFunction = (parameterName) => $"\"'\"+{parameterName}+\"'\"";
+
             WebApiClientTS.GeneratorConfig config = new GeneratorConfig()
             {
                 ControllerTemplate = System.Web.Hosting.HostingEnvironment.MapPath("~/App_Data/TsTemplates/template.cshtml"),
@@ -28,7 +33,9 @@ namespace WebApiSample
                 IgnoreThoseControllers = new string[]
                 {
                     "Values"
-                }
+                },
+                RouteTemplate = "C/G/API/{action}",
+                StringifyFunction = stringifyFunction
             };
             
             WebApiClientTS.Generator.ConfigureApiGenerator(GlobalConfiguration.Configuration.Routes, config);

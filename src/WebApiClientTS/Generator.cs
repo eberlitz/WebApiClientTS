@@ -61,10 +61,10 @@ namespace WebApiClientTS
         public static void ConfigureApiGenerator(System.Web.Http.HttpRouteCollection routes, GeneratorConfig configuration)
         {
             GeneratorConfig.CheckGeneratorConfig(configuration);
-
+            
             routes.MapHttpRoute(
                    name: "CodeGenerator",
-                   routeTemplate: "C/G/API/{action}",
+                   routeTemplate: String.IsNullOrEmpty(configuration.RouteTemplate) ? "C/G/API/{action}" : configuration.RouteTemplate,
                    defaults: null,
                    constraints: null,
                    handler: new GeneratorHandler(configuration)
@@ -150,11 +150,7 @@ namespace WebApiClientTS
                 .Where(w => !_configuration.IgnoreThoseControllers.Contains(w.ActionDescriptor.ControllerDescriptor.ControllerName))
                 .ToList();
 
-            // Sample of an stringify function
-            Func<string, string> stringifyFunction = (parameterName) => $"JSON.stringify({parameterName})";
-            //Func<string, string> stringifyFunction = (parameterName) => $"\"'\"+{parameterName}+\"'\"";
-
-            var metadata = ApiDescriptorMetadata.From(apis, stringifyFunction).Where(ctrl => !_configuration.IgnoreThoseControllers.Contains(ctrl.Name));
+            var metadata = ApiDescriptorMetadata.From(apis, _configuration.StringifyFunction).Where(ctrl => !_configuration.IgnoreThoseControllers.Contains(ctrl.Name));
 
             // Add settings to the template of AngularJS request
             metadata.SelectMany(a => a.Methods).ToList().ForEach(m =>

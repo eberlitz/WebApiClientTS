@@ -33,6 +33,18 @@ namespace WebApiClientTS
         public string OutputFolderPath { get; set; }
 
         /// <summary>
+        /// You can set the route template to acess the Run action on controller CodeGenerator.
+        /// The default route is: C/G/API/{action}
+        /// The endpoint will be http://localhost:16120/c/g/api/run
+        /// </summary>
+        public string RouteTemplate { get; set; }
+
+        /// <summary>
+        /// Stringify function to handle string parameters.
+        /// </summary>
+        public Func<string, string> StringifyFunction { get; set; }
+
+        /// <summary>
         /// Check if configuration is valid.
         /// </summary>
         /// <param name="configuration">Configuration parameters to check.</param>
