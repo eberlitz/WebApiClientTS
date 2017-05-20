@@ -97,6 +97,10 @@ At this way you don't need to create a new controller in you application, you ju
 
             // The endpoint will be http://localhost:16120/c/g/api/run
 
+            // Sample of an stringify function
+            Func<string, string> stringifyFunction = (parameterName) => $"JSON.stringify({parameterName})";
+            //Func<string, string> stringifyFunction = (parameterName) => $"\"'\"+{parameterName}+\"'\"";
+
             WebApiClientTS.GeneratorConfig config = new GeneratorConfig()
             {
                 ControllerTemplate = System.Web.Hosting.HostingEnvironment.MapPath("~/App_Data/TsTemplates/template.cshtml"),
@@ -104,7 +108,9 @@ At this way you don't need to create a new controller in you application, you ju
                 IgnoreThoseControllers = new string[]
                 {
                     "Values"
-                }
+                },
+                RouteTemplate = "C/G/API/{action}",
+                StringifyFunction = stringifyFunction
             };
             
             WebApiClientTS.Generator.ConfigureApiGenerator(GlobalConfiguration.Configuration.Routes, config);
