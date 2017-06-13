@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Web.Http;
 using System.Web.Mvc;
@@ -35,7 +36,27 @@ namespace WebApiSample
                     "Values"
                 },
                 RouteTemplate = "C/G/API/{action}",
-                StringifyFunction = stringifyFunction
+                StringifyFunction = stringifyFunction,
+
+                // Angular 1
+                ExtraParameters = new List<ParameterMetadata>
+                {
+                    new ParameterMetadata
+                    {
+                        Name = "config?",
+                        Type = "ng.IRequestConfig"
+                    }
+                }
+
+                // Angular 2
+                //ExtraParameters = new List<ParameterMetadata>
+                //{
+                //    new ParameterMetadata
+                //    {
+                //        Name = "config?",
+                //        Type = "RequestOptionsArgs"
+                //    }
+                //}
             };
             
             WebApiClientTS.Generator.ConfigureApiGenerator(GlobalConfiguration.Configuration.Routes, config);

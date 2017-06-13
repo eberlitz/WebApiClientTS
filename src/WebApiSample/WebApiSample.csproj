@@ -200,6 +200,7 @@
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
     <Content Include="App_Data\TsTemplates\template.cshtml" />
     <Content Include="App_Data\TsTemplates\templateSimple.cshtml" />
+    <Content Include="App_Data\TsTemplates\templateNG2.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
