@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using TypeLite.Extensions;
 using TypeLite.ReadOnlyDictionary;
 using TypeLite.TsModels;
@@ -327,7 +325,7 @@ namespace TypeLite
             string typeName = this.GetTypeName(classModel);
             string visibility = this.GetTypeVisibility(classModel, typeName) ? "export " : "";
             _docAppender.AppendClassDoc(sb, classModel, typeName);
-            sb.AppendFormatIndented("{0}interface {1}", visibility, typeName);
+            sb.AppendFormatIndented("{0}class {1}", visibility, typeName);
             if (classModel.BaseType != null)
             {
                 sb.AppendFormat(" extends {0}", this.GetFullyQualifiedTypeName(classModel.BaseType));
@@ -562,6 +560,5 @@ namespace TypeLite
         {
             return _moduleNameFormatter(module);
         }
-
     }
 }

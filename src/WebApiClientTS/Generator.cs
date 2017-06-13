@@ -155,10 +155,8 @@ namespace WebApiClientTS
             // Add settings to the template of AngularJS request
             metadata.SelectMany(a => a.Methods).ToList().ForEach(m =>
             {
-                m.Parameters.Add(new ParameterMetadata()
-                {
-                    Name = "config?",
-                    Type = "ng.IRequestConfig"
+                _configuration.ExtraParameters.ForEach(parameter => {
+                    m.Parameters.Add(parameter);
                 });
             });
 

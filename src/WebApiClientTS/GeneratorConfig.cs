@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace WebApiClientTS
@@ -8,6 +9,14 @@ namespace WebApiClientTS
     /// </summary>
     public sealed class GeneratorConfig
     {
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
+        public GeneratorConfig()
+        {
+            ExtraParameters = new List<ParameterMetadata>();
+        }
+
         /// <summary>
         /// The template file wich you want to use to generate.
         /// </summary>
@@ -43,6 +52,11 @@ namespace WebApiClientTS
         /// Stringify function to handle string parameters.
         /// </summary>
         public Func<string, string> StringifyFunction { get; set; }
+
+        /// <summary>
+        /// List of extra parameters.
+        /// </summary>
+        public List<ParameterMetadata> ExtraParameters { get; set; }
 
         /// <summary>
         /// Check if configuration is valid.
