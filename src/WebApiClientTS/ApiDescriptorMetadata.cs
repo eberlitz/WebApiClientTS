@@ -228,8 +228,8 @@ namespace WebApiClientTS
             {
                 returnType = "void";
             }
-            // Se o tipo for este, então significa que não foi definido nenhum tipo especifico
-            else if (type.Name == "IHttpActionResult")
+            //Se o tipo for este, então significa que não foi definido nenhum tipo especifico
+            else if (responseType == null && type.Name == "IHttpActionResult")
             {
                 returnType = "any";
             }
